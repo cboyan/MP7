@@ -258,7 +258,7 @@ public class Player {
 				int x = Keyboard.nextInt() - 1;
 				//if x and y is out of the bounds of the board then error message will apear
 				//and the user will have to input the data again until it is inside the bounds
-				if (x < 0 || x >= 10 || y < 0 || y >= 10) {
+				if (x < 0 || x >= player.second.getDim() || y < 0 || y >= player.second.getDim()) {
 					System.out.println("Sorry your input is incorrect plese re-enter");	
 				}
 				//if x and y is in bounds then we go to asking the orientation of the ship
@@ -276,7 +276,7 @@ public class Player {
 					if (choice == 1) {
 						//this loop checks if all the values on the board that this ship would take up are in fact empty (marked by zero)
 						//if any value is not zero (means already taken up by another ship then console forces to re-enter input
-						if (x + ship.getLength() > 10) {
+						if (x + ship.getLength() > player.second.getDim()) {
 							System.out.println("Sorry that input is incorrect you have to re-enter");
 						}
 						else {
@@ -322,7 +322,7 @@ public class Player {
 					if (choice == 3) {
 						//this loop checks if all the values on the board that this ship would take up are in fact empty (marked by zero)
 						//if any value is not zero (means already taken up by another ship then console forces to re-enter input
-						if (y + ship.getLength() > 10) {
+						if (y + ship.getLength() > player.second.getDim()) {
 							System.out.println("Sorry that input is incorrect you have to re-enter");
 						}
 						else {
