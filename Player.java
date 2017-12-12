@@ -5,9 +5,9 @@ public class Player {
 	//the player name
 		String name;
 		//the board the player is shooting into
-		static Board hello;
+		Board hello;
 		//the current board that player has
-		static Board second;
+		Board second;
 		
 		//creates a player object. Takes two board objects so it can identify the board the player is shooting into (board1)
 		//and the board that represents the players board (board2)
@@ -122,7 +122,7 @@ public class Player {
 				System.out.println("");
 				System.out.print("What y coordinate would you like to attack? ");
 				int y = Keyboard.nextInt() - 1; 
-				if (x < 0 || x >= second.getDim() || y < 0 || y >= second.getDim()) {
+				if (x < 0 || x >= player1.second.getDim() || y < 0 || y >= player2.second.getDim()) {
 					System.out.println("Sorry your input is out of bounds for the board please re-enter");
 					System.out.println("");
 				}
@@ -164,7 +164,7 @@ public class Player {
 				System.out.println("");
 				System.out.print("What y corrdinate would you like to attack? ");
 				int y = Keyboard.nextInt() - 1; 
-				if (x < 0 || x >= second.getDim() || y < 0 || y >= second.getDim()) {
+				if (x < 0 || x >= player1.second.getDim() || y < 0 || y >= player2.second.getDim()) {
 					System.out.println("Sorry, your input is out of bounds for the board. Please re-enter \n");
 					System.out.println("");
 				}
@@ -251,21 +251,21 @@ public class Player {
 			while (flag) {
 				System.out.println(" ");
 				//asking for the x and y coordinate for the head of the ship
-				System.out.print("For the ship of size " + ship.getLength() + ", what x cordinate do you want to place it? ");
+				System.out.print("For the ship of size " + ship.getLength() + " what x cordinate do you want to place it? ");
 				int y = Keyboard.nextInt() - 1; 
 				System.out.println(" ");
-				System.out.print("and for what y coordinate? ");
+				System.out.print("and for what y cordinate? ");
 				int x = Keyboard.nextInt() - 1;
 				//if x and y is out of the bounds of the board then error message will apear
 				//and the user will have to input the data again until it is inside the bounds
-				if (x < 0 || x >= second.getDim() || y < 0 || y >= second.getDim()) {
-					System.out.println("Sorry, your input is incorrect. Please re-enter \n");	
+				if (x < 0 || x >= 10 || y < 0 || y >= 10) {
+					System.out.println("Sorry your input is incorrect plese re-enter");	
 				}
 				//if x and y is in bounds then we go to asking the orientation of the ship
 				//for example if the user puts their coordinates as 2,3 and their orientation as North
 				//then the head of the ship will be at 2,3 and the rest of the ship will be in the positive y direction
 				else {
-					System.out.println("What direction would you like to face your ship? ");
+					System.out.println("What direction would you like to put your ship");
 					System.out.println("1: South");
 					System.out.println("2: North");
 					System.out.println("3: East");
@@ -276,13 +276,13 @@ public class Player {
 					if (choice == 1) {
 						//this loop checks if all the values on the board that this ship would take up are in fact empty (marked by zero)
 						//if any value is not zero (means already taken up by another ship then console forces to re-enter input
-						if (x + ship.getLength() > second.getDim()) {
-							System.out.println("Sorry that input is invalid. Please re-enter \n");
+						if (x + ship.getLength() > 10) {
+							System.out.println("Sorry that input is incorrect you have to re-enter");
 						}
 						else {
 							for (int i = x; i < x + ship.getLength(); i++) {
-								if (second.getBoard()[i][y] != '⚪' ) {
-									System.out.println("Sorry that input is invalid. Please re-enter \n");
+								if (player.second.getBoard()[i][y] != '⚪' ) {
+									System.out.println("Sorry that input is incorrect you have to re-enter");
 									i = x + ship.getLength();
 									solve = 1;
 								}
@@ -300,12 +300,12 @@ public class Player {
 						//this loop checks if all the values on the board that this ship would take up are in fact empty (marked by zero)
 						//if any value is not zero (means already taken up by another ship then console forces to re-enter input
 						if (x - ship.getLength() < -1) {
-							System.out.println("Sorry that input is invalid. Please re-enter \n");
+							System.out.println("Sorry that input is incorrect you have to re-enter!!");
 						}
 						else {
 							for (int i = x; i > x - ship.getLength(); i--) {
-								if (second.getBoard()[i][y] != '⚪' )  {
-									System.out.println("Sorry that input is invalid. Please re-enter \n");
+								if (player.second.getBoard()[i][y] != '⚪' )  {
+									System.out.println("Sorry that input is incorrect you have to re-enter");
 									i = 0;
 									solve = 1;
 								}
@@ -322,13 +322,13 @@ public class Player {
 					if (choice == 3) {
 						//this loop checks if all the values on the board that this ship would take up are in fact empty (marked by zero)
 						//if any value is not zero (means already taken up by another ship then console forces to re-enter input
-						if (y + ship.getLength() > second.getDim()) {
-							System.out.println("Sorry that input is invalid. Please re-enter \n");
+						if (y + ship.getLength() > 10) {
+							System.out.println("Sorry that input is incorrect you have to re-enter");
 						}
 						else {
 							for (int i = y; i < y + ship.getLength(); i++) {
 								if (player.second.getBoard()[x][i] != '⚪' ) {
-									System.out.println("Sorry that input is invalid. Please re-enter \n");
+									System.out.println("Sorry that input is incorrect you have to re-enter");
 									i = y + ship.getLength();
 									solve = 1;
 								}
@@ -347,12 +347,12 @@ public class Player {
 						//this loop checks if all the values on the board that this ship would take up are in fact empty (marked by zero)
 						//if any value is not zero (means already taken up by another ship then console forces to re-enter input
 						if (y - ship.getLength() < -1) {
-							System.out.println("Sorry that input is invalid. Please re-enter \n");
+							System.out.println("Sorry that input is incorrect you have to re-enter");
 						}
 						else {
 							for (int i = y; i > y - ship.getLength(); i--) {
 								if (player.second.getBoard()[x][i] != '⚪' )  {
-									System.out.println("Sorry that input is invalid. Please re-enter \n");
+									System.out.println("Sorry that input is incorrect you have to re-enter");
 									i = 0;
 									solve = 1;
 								}
@@ -368,7 +368,7 @@ public class Player {
 				}
 			}
 			//lets the user know that the ship is succesfully placed
-			System.out.println("Your ship has been placed!");
+			System.out.println("ship placed");
 		}
 		
 		//will show the boards at the start and the end of every turn so the user know where he or she has already shot
